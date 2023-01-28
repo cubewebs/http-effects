@@ -1,0 +1,31 @@
+<div class="card text-center mt-5">
+	<div class="card-header d-md-flex justify-content-md-end">
+	  <ul class="nav nav-pills card-header-pills">
+		<li class="nav-item">
+		  <a class="nav-link" routerLink="/food-order"><button class="btn btn-primary me-md-2" type="button" routerLinkActive="active">Order Food</button></a>
+		</li>
+	  </ul>
+	</div>
+	<div class="card-body">
+	  <h5 class="card-title">Special Plates</h5>
+	  <p class="card-text">This are our house special dishes</p>
+	  <table class="table table-striped table-hover">
+		<thead>
+		  <tr>
+			<th scope="col">#</th>
+			<th scope="col">Name</th>
+			<th scope="col">Ingredients</th>
+			<th scope="col">Price</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr *ngFor="let food of (food$ | async); let i = index">
+			<th scope="row">{{food.id}}</th>
+			<td>{{food.name}}</td>
+			<td>{{food.ingredients}}</td>
+			<td>{{food.price}}</td>
+		  </tr>
+		</tbody>
+	  </table>
+	</div>
+  </div>

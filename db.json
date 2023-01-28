@@ -1,19 +1,57 @@
 {
-  "posts": [
+  "user": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "firstName": "json-server",
+      "lastName": "typicode",
+      "emial": "typicode",
+      "phoneNumber": "typicode"
     }
   ],
-  "comments": [
+  "order": [
     {
       "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "userId": 1,
+      "address": "some comment",
+      "orderName": "some comment",
+      "phoneNumber": "some comment",
+	  "foodOrder": [
+		{
+			"foodId": 1
+		},
+		{
+			"foodId": 4
+		},
+		{
+			"foodId": 17
+		},
+		{
+			"foodId": 7
+		}
+	  ]
     }
   ],
-  "profile": {
-    "name": "typicode"
-  }
+  "food": [
+	{"id": 1, "name": "Pizza Margarita", "ingredients": "Salse, Chees", "price": 10},
+	{"id": 2, "name": "Pizza Diabola", "ingredients": "Salse, Chees, Pepperonni", "price": 15},
+	{"id": 3, "name": "Pizza Mare", "ingredients": "Salse, Chees, Shrimps, Anchovi", "price": 16},
+	{"id": 4, "name": "Pizza 4 Staccione", "ingredients": "Salse, Chees, Shrimps, Meat", "price": 16},
+	{"id": 5, "name": "Pizza Fungi", "ingredients": "Salse, Chees", "price": 17},
+	{"id": 6, "name": "Pizza Speciale", "ingredients": "Salse, Chees", "price": 17},
+	{"id": 7, "name": "Spaggetti Carbonara", "ingredients": "Salse, Chees", "price": 18},
+	{"id": 8, "name": "Spaggetti Mare", "ingredients": "Salse, Chees", "price": 18},
+	{"id": 9, "name": "Spaggetti Bolonniesa", "ingredients": "Salse, Chees", "price": 17},
+	{"id": 10, "name": "Spaggetti La Burratta", "ingredients": "Salse, Chees", "price": 19},
+	{"id": 11, "name": "Spaggetti Oliva", "ingredients": "Salse, Chees", "price": 14},
+	{"id": 12, "name": "Rissotto La Campannia", "ingredients": "Salse, Chees", "price": 16},
+	{"id": 13, "name": "Rissotto Champinno", "ingredients": "Salse, Chees", "price": 16},
+	{"id": 14, "name": "Rissotto Speciale", "ingredients": "Salse, Chees", "price": 19},
+	{"id": 15, "name": "Rissotto Bolonniesa", "ingredients": "Salse, Chees", "price": 14},
+	{"id": 16, "name": "Calzonne Diabola", "ingredients": "Salse, Chees", "price": 16},
+	{"id": 17, "name": "Calzonne Mare", "ingredients": "Salse, Chees", "price": 17},
+	{"id": 18, "name": "Calzonne 4 Staccione", "ingredients": "Salse, Chees", "price": 18},
+	{"id": 19, "name": "Calzonne Carnni", "ingredients": "Salse, Chees", "price": 18},
+	{"id": 20, "name": "Calzonne Burrata", "ingredients": "Salse, Chees", "price": 18},
+	{"id": 21, "name": "Calzonne Speciale", "ingredients": "Salse, Chees", "price": 19}
+  ]
 }
