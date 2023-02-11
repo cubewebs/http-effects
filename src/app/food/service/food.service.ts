@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { Food } from 'src/app/shared/models/food';
+import { Food } from 'src/app/shared/models/Food';
+import { Order } from '../../shared/models/Order';
 
 
 @Injectable({
@@ -21,5 +22,10 @@ export class FoodService {
 
 	return this.http.get<Food[]>(url)
 	
+  }
+
+  addOrder(order: Order): Observable<Order> {
+	const url: string = `${this.baseUrl}/order`;
+	return this.http.post<Order>(url, order)
   }
 }
