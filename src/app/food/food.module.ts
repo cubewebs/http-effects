@@ -9,6 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromOrder from './store/order.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { OrderEffects } from './store/order.effects';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [FoodComponent, FoodOrderComponent],
@@ -18,6 +19,7 @@ import { OrderEffects } from './store/order.effects';
     HttpClientModule,
     StoreModule.forFeature(fromOrder.ordersFeatureKey, fromOrder.reducer),
     EffectsModule.forFeature([OrderEffects]),
+	ReactiveFormsModule
   ],
 })
 export class FoodModule {}
