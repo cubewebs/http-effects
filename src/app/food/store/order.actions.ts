@@ -4,8 +4,32 @@ import { Update } from '@ngrx/entity';
 import { Order } from '../../shared/models/Order';
 
 export const loadOrders = createAction(
-  '[Order/API] Load Orders', 
+  '[Order/API] Load Orders'
+);
+
+export const loadOrdersSuccess = createAction(
+  '[Order/Effect] Load Orders Success', 
   props<{ orders: Order[] }>()
+);
+
+export const loadOrdersFailure = createAction(
+  '[Order/Effect] Load Orders Failure', 
+  props<{ error: any }>()
+);
+
+export const loadOrder = createAction(
+  '[Order/API] Load Order',
+  props<{ id: number }>()
+);
+
+export const loadOrderSuccess = createAction(
+  '[Order/Effect] Load Order Success', 
+  props<{ selectedOrder: Order }>()
+);
+
+export const loadOrderFailure = createAction(
+  '[Order/Effect] Load Order Failure', 
+  props<{ error: any }>()
 );
 
 export const addOrder = createAction(

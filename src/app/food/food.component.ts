@@ -7,6 +7,7 @@ import { Food } from '../shared/models/Food';
 import { Router } from '@angular/router';
 import { Order } from '../shared/models/Order';
 import * as orderActions from './store/order.actions';
+import * as orderSelectors from './store/order.selectors';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class FoodComponent implements AfterContentInit {
 	quantity: number = 0;
 	foodOrder: Food[] = [];
 	order?: Order;
+	orders$: Observable<Order[]> = new Observable();
 
 	constructor(
 		private store: Store<OrderState>,
@@ -29,6 +31,7 @@ export class FoodComponent implements AfterContentInit {
 
 	ngAfterContentInit(): void {
 		this.loadFoodList();
+		this.orders$ = this.store.select(orderSelectors.selectAllOrders)
 	}
 
 	loadFoodList() {
