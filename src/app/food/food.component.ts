@@ -31,7 +31,6 @@ export class FoodComponent implements AfterContentInit {
 
 	ngAfterContentInit(): void {
 		this.loadFoodList();
-		this.orders$ = this.store.select(orderSelectors.selectAllOrders)
 	}
 
 	loadFoodList() {

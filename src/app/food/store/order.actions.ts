@@ -38,12 +38,12 @@ export const addOrder = createAction(
 );
 
 export const addOrderSuccess = createAction(
-  '[Order/API] Add Order Success',
+  '[Order/Effect] Add Order Success',
   props<{ order: Order }>()
 );
 
 export const addOrderFailure = createAction(
-  '[Order/API] Add Order Failure',
+  '[Order/Effect] Add Order Failure',
   props<{ error: any }>()
 );
 

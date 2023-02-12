@@ -9,6 +9,11 @@ export const selectAllOrders = createSelector(
 		orderReducers.selectAll
 );
 
+export const selectOneOrder = createSelector(
+		selectOrderState,
+		(state: OrderState) => state.selectedOrderId
+);
+
 export const  seelectEntities = createSelector(
 	selectOrderState,
 	orderReducers.selectEntities

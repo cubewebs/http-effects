@@ -7,14 +7,16 @@ export const ordersFeatureKey = 'orders';
 
 export interface OrderState extends EntityState<Order> {
   // additional entities state properties
+  error: any,
+  selectedOrderId: number | null,
 }
 
-export const adapter: EntityAdapter<Order> = createEntityAdapter<Order>({
-	selectId: order => order.id
-});
+export const adapter: EntityAdapter<Order> = createEntityAdapter<Order>();
 
 export const initialState: OrderState = adapter.getInitialState({
   // additional entity state properties
+  error: null,
+  selectedOrderId: null,
 });
 
 export const reducer = createReducer(
