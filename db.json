@@ -17,16 +17,18 @@
       "phoneNumber": "some comment",
       "foodOrder": [
         {
-          "foodId": 1
+          "id": 1,
+          "name": "Pizza Margarita",
+          "ingredients": "Salse, Chees",
+          "price": 10,
+          "quantity": 2
         },
         {
-          "foodId": 4
-        },
-        {
-          "foodId": 17
-        },
-        {
-          "foodId": 7
+          "id": 3,
+          "name": "Pizza Mare",
+          "ingredients": "Salse, Chees, Shrimps, Anchovi",
+          "price": 16,
+          "quantity": 1
         }
       ]
     },
@@ -72,6 +74,29 @@
           "name": "Pizza Mare",
           "ingredients": "Salse, Chees, Shrimps, Anchovi",
           "price": 16,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "userId": 0,
+      "address": "",
+      "orderName": "",
+      "phoneNumber": "",
+      "foodOrder": [
+        {
+          "id": 1,
+          "name": "Pizza Margarita",
+          "ingredients": "Salse, Chees",
+          "price": 10,
+          "quantity": 2
+        },
+        {
+          "id": 2,
+          "name": "Pizza Diabola",
+          "ingredients": "Salse, Chees, Pepperonni",
+          "price": 15,
           "quantity": 1
         }
       ]

@@ -24,6 +24,12 @@ export class FoodService {
 	
   }
 
+  getAllOrders(): Observable<Order[]> {
+	const url = `${this.baseUrl}/order`;
+
+	return this.http.get<Order[]>(url)
+  }
+
   addOrder(order: Order): Observable<Order> {
 	const url: string = `${this.baseUrl}/order`;
 	return this.http.post<Order>(url, order)

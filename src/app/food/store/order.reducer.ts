@@ -20,6 +20,18 @@ export const initialState: OrderState = adapter.getInitialState({
 export const reducer = createReducer(
   initialState,
 
+  on(OrderActions.loadOrdersSuccess, (state, action) =>
+    adapter.setAll(action.orders, state)
+  ),
+  on(OrderActions.loadOrdersFailure, (state, action) =>
+  {return {...state, error: action.error}}
+  ),
+  on(OrderActions.loadOrderSuccess, (state, action) =>
+    adapter.setOne(action.selectedOrder, state)
+  ),
+  on(OrderActions.loadOrderFailure, (state, action) =>
+  {return {...state, error: action.error}}
+  ),
   on(OrderActions.addOrderSuccess, (state, action) =>
     adapter.addOne(action.order, state)
   ),
@@ -46,9 +58,6 @@ export const reducer = createReducer(
   ),
   on(OrderActions.deleteOrders, (state, action) =>
     adapter.removeMany(action.ids, state)
-  ),
-  on(OrderActions.loadOrders, (state, action) =>
-    adapter.setAll(action.orders, state)
   ),
   on(OrderActions.clearOrders, (state) => adapter.removeAll(state))
 );
