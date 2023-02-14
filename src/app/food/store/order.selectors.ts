@@ -1,6 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { OrderState } from './order.reducer';
 import * as orderReducers from '../store/order.reducer';
+import { state } from '@angular/animations';
 
 export const selectOrderState = createFeatureSelector<OrderState>('orders')
 
@@ -34,3 +35,9 @@ export const selectOrderById = (id: number) =>
 		selectAllOrders,
 		(orders) => orders[id]
 	);
+
+export const areOrdersLoaded = createSelector(
+	selectOrderState,
+	state => state.allOrdersLoaded
+);
+

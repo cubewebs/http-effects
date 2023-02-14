@@ -9,6 +9,7 @@ export interface OrderState extends EntityState<Order> {
   // additional entities state properties
   error: any,
   selectedOrderId: number | null,
+  allOrdersLoaded: boolean,
 }
 
 export const adapter: EntityAdapter<Order> = createEntityAdapter<Order>();
@@ -17,13 +18,14 @@ export const initialState: OrderState = adapter.getInitialState({
   // additional entity state properties
   error: null,
   selectedOrderId: null,
+  allOrdersLoaded: false,
 });
 
 export const reducer = createReducer(
   initialState,
 
   on(OrderActions.loadOrdersSuccess, (state, action) =>
-    adapter.setAll(action.orders, state)
+    adapter.setAll(action.orders, {...state, allOrdersLoaded: true})
   ),
   on(OrderActions.loadOrdersFailure, (state, action) =>
   {return {...state, error: action.error}}
@@ -55,8 +57,11 @@ export const reducer = createReducer(
   on(OrderActions.updateOrders, (state, action) =>
     adapter.updateMany(action.orders, state)
   ),
-  on(OrderActions.deleteOrder, (state, action) =>
+  on(OrderActions.deleteOrderSuccess, (state, action) =>
     adapter.removeOne(action.id, state)
+  ),
+  on(OrderActions.deleteOrderFailure, (state, action) =>
+  	{return {...state, error: action.error}}
   ),
   on(OrderActions.deleteOrders, (state, action) =>
     adapter.removeMany(action.ids, state)

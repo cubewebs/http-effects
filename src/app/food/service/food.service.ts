@@ -40,4 +40,14 @@ export class FoodService {
 	const url: string = `${this.baseUrl}/order`;
 	return this.http.post<Order>(url, order)
   }
+
+  deleteOrder(id: number): Observable<Order> {
+	const url = `${this.baseUrl}/order/${id}`;
+	return this.http.delete<Order>(url)
+  }
+
+  updateOrder(id: number, changes: Order): Observable<Order> {
+	const url = `${this.baseUrl}/order/${id}`;
+	return this.http.put<Order>(url, changes)
+  }
 }

@@ -74,7 +74,17 @@ export const updateOrders = createAction(
 
 export const deleteOrder = createAction(
   '[Order/API] Delete Order',
-  props<{ id: string }>()
+  props<{ id: number }>()
+);
+
+export const deleteOrderSuccess = createAction(
+  '[Order/API] Delete Order Success',
+  props<{ id: number }>()
+);
+
+export const deleteOrderFailure = createAction(
+  '[Order/API] Delete Order Failure',
+  props<{ error: any }>()
 );
 
 export const deleteOrders = createAction(

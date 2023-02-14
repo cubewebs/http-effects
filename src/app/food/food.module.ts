@@ -10,13 +10,17 @@ import * as fromOrder from './store/order.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { OrderEffects } from './store/order.effects';
 import { ReactiveFormsModule } from '@angular/forms';
+import { OrderListComponent } from './order-list/order-list.component';
+import { MatIconModule } from '@angular/material/icon';
+import { ThankyouComponent } from './thankyou/thankyou.component';
 
 @NgModule({
-  declarations: [FoodComponent, FoodOrderComponent],
+  declarations: [FoodComponent, FoodOrderComponent, OrderListComponent, ThankyouComponent],
   imports: [
     CommonModule,
     FoodRoutingModule,
     HttpClientModule,
+	MatIconModule,
     StoreModule.forFeature(fromOrder.ordersFeatureKey, fromOrder.reducer),
     EffectsModule.forFeature([OrderEffects]),
 	ReactiveFormsModule

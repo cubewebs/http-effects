@@ -4,7 +4,7 @@ import { OrderState } from './store/order.reducer';
 import { FoodService } from './service/food.service';
 import { Observable } from 'rxjs';
 import { Food } from '../shared/models/Food';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Order } from '../shared/models/Order';
 import * as orderActions from './store/order.actions';
 import * as orderSelectors from './store/order.selectors';
@@ -22,12 +22,16 @@ export class FoodComponent implements AfterContentInit {
 	foodOrder: Food[] = [];
 	order?: Order;
 	orders$: Observable<Order[]> = new Observable();
+	orderId?: Number;
 
 	constructor(
 		private store: Store<OrderState>,
 		private foodService: FoodService,
-		private route: Router
-	) {}
+		private route: Router,
+		private router: ActivatedRoute
+	) {
+		this.router.paramMap.subscribe( params => this.orderId = Number(params.get('id')))
+	}
 
 	ngAfterContentInit(): void {
 		this.loadFoodList();
@@ -51,13 +55,14 @@ export class FoodComponent implements AfterContentInit {
 		this.order = {
 			id: 0,
 			userId: 0, 
-			address: '',
-			orderName: '',
+			firstName: '',
+			lastName: '',
+			email: '',
 			phoneNumber: '',
+			address: '',
+			zip: '',
 			foodOrder: [...this.foodOrder],
 		}
-		console.log('this.foodOrder ->', this.foodOrder)
-		console.log('this.order ->', this.order)
 		this.store.dispatch(orderActions.addOrder({order: this.order}))
 		this.route.navigate(['/food-order'])
 		this.order = undefined;

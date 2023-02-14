@@ -3,15 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { FoodComponent } from './food.component';
 import { FoodOrderComponent } from './food-order/food-order.component';
 import { OrdersResolver } from './order.resolver';
+import { OrderListComponent } from './order-list/order-list.component';
+import { ThankyouComponent } from './thankyou/thankyou.component';
 
 const routes: Routes = [
 	{
 		path: '',
 		resolve: { orders: OrdersResolver},
 		children: [
-			{ path: 'food', component: FoodComponent },
+			{ path: 'food/:id', component: FoodComponent },
 			{ path: 'food-order', component: FoodOrderComponent },
-			{ path: '', redirectTo: 'food', pathMatch: 'full' },
+			{ path: 'order-list', component: OrderListComponent },
+			{ path: 'thankyou', component: ThankyouComponent },
+			{ path: '', redirectTo: 'order-list', pathMatch: 'full' },
 		]
 	}
 ];

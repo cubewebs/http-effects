@@ -40,7 +40,7 @@
           </div>
         </div>
         <div class="col-12 d-md-flex justify-content-md-end">
-          <button type="submit" class="btn btn-primary">Order</button>
+          <button type="submit" class="btn btn-primary" [disabled]="orderFormData.invalid">Order</button>
         </div>
       </form>
     </div>

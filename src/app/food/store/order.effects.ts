@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as orderActions from '../store/order.actions';
 import { catchError, concatMap, exhaustMap, map, mergeMap } from 'rxjs/operators';
 import { FoodService } from '../service/food.service';
-import { of } from 'rxjs';
+import { of, tap } from 'rxjs';
 
 
 @Injectable()
@@ -13,7 +13,7 @@ export class OrderEffects {
 		() => this.actions$.pipe(
 			ofType(orderActions.loadOrders),
 			mergeMap(
-				(action) => this.fs.getAllOrders().pipe(
+				() => this.fs.getAllOrders().pipe(
 					map( orders => orderActions.loadOrdersSuccess({ orders })),
 					catchError( error => of(orderActions.loadOrdersFailure({ error })))
 				)
@@ -40,6 +40,18 @@ export class OrderEffects {
 				action => this.fs.addOrder(action.order).pipe(
 					map( order => orderActions.addOrderSuccess({ order })),
 					catchError( error => of(orderActions.addOrderFailure({ error })))
+				)
+			)
+		)
+	);
+
+	deleteOrder$ = createEffect(
+		() => this.actions$.pipe(
+			ofType(orderActions.deleteOrder),
+			mergeMap(
+				({id}) => this.fs.deleteOrder(id).pipe(
+					map( ({id}) => orderActions.deleteOrderSuccess({ id })),
+					catchError( error => of(orderActions.deleteOrderFailure({ error })))
 				)
 			)
 		)
