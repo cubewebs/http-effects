@@ -9,6 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MatIconModule } from '@angular/material/icon';
+import { EntityDataModule } from '@ngrx/data';
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 	MatIconModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [],
   bootstrap: [AppComponent]

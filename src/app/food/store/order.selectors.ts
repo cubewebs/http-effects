@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { OrderState } from './order.reducer';
+import { OrderState, selectOrderEntities } from './order.reducer';
 import * as orderReducers from '../store/order.reducer';
 import { state } from '@angular/animations';
 
@@ -33,11 +33,23 @@ export const selectTotalCount = createSelector(
 export const selectOrderById = (id: number) => 
 	createSelector(
 		selectAllOrders,
-		(orders) => orders[id]
+		(orders) => orders.find(o => o.id === id)
 	);
 
 export const areOrdersLoaded = createSelector(
 	selectOrderState,
 	state => state.allOrdersLoaded
 );
+
+export const selectCurrentOrderId = createSelector(
+	selectOrderState,
+	orderReducers.getSelectedOrderId
+);
+
+export const selectCurrentOrder = createSelector(
+	selectOrderEntities,
+	selectCurrentOrderId,
+	(orderEntities, orderId) => orderId && orderEntities[orderId]
+);
+
 

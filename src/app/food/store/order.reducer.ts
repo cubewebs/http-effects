@@ -10,6 +10,7 @@ export interface OrderState extends EntityState<Order> {
   error: any,
   selectedOrderId: number | null,
   allOrdersLoaded: boolean,
+  currentOrder: Order | null,
 }
 
 export const adapter: EntityAdapter<Order> = createEntityAdapter<Order>();
@@ -19,6 +20,7 @@ export const initialState: OrderState = adapter.getInitialState({
   error: null,
   selectedOrderId: null,
   allOrdersLoaded: false,
+  currentOrder: null,
 });
 
 export const reducer = createReducer(
@@ -28,16 +30,16 @@ export const reducer = createReducer(
     adapter.setAll(action.orders, {...state, allOrdersLoaded: true})
   ),
   on(OrderActions.loadOrdersFailure, (state, action) =>
-  {return {...state, error: action.error}}
+  {return {...state, error: action.error, allOrdersLoaded: false}}
   ),
   on(OrderActions.loadOrderSuccess, (state, action) =>
-    adapter.setOne(action.selectedOrder, state)
+    adapter.setOne(action.selectedOrder, {...state, currentOrder: action.selectedOrder, selectedOrderId: action.selectedOrder.id})
   ),
   on(OrderActions.loadOrderFailure, (state, action) =>
   {return {...state, error: action.error}}
   ),
   on(OrderActions.addOrderSuccess, (state, action) =>
-    adapter.addOne(action.order, state)
+    adapter.addOne(action.order, {...state, currentOrder: action.order, selectedOrderId: action.order.id})
   ),
   on(OrderActions.addOrderFailure, (state, action) =>
     {return {...state, error: action.error}}
@@ -52,7 +54,10 @@ export const reducer = createReducer(
     adapter.upsertMany(action.orders, state)
   ),
   on(OrderActions.updateOrder, (state, action) =>
-    adapter.updateOne(action.order, state)
+  	adapter.updateOne(action.update, state)
+  ),
+  on(OrderActions.updateOrderFailure, (state, action) =>
+  	{return {...state, error: action.error}}
   ),
   on(OrderActions.updateOrders, (state, action) =>
     adapter.updateMany(action.orders, state)
@@ -69,5 +74,13 @@ export const reducer = createReducer(
   on(OrderActions.clearOrders, (state) => adapter.removeAll(state))
 );
 
+export const getSelectedOrderId = (state: OrderState) => state.selectedOrderId;
+
 export const { selectIds, selectEntities, selectAll, selectTotal } =
   adapter.getSelectors();
+
+  // select the array of order ids
+  export const selectOrderIds = selectIds;
+
+  // select the dictionary of order entities
+  export const selectOrderEntities = selectEntities;

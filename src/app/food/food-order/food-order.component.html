@@ -2,7 +2,7 @@
     <div class="card-body">
       <h5 class="card-title">New Order</h5>
       <h6 class="card-subtitle mb-2 text-muted mb-4">Fill in the form to make a new order to be delivered</h6>
-      <form class="row g-3" [formGroup]="orderFormData" (submit)="addNewOrder()">
+      <form class="row g-3" [formGroup]="orderFormData" (submit)="saveOrder()">
         <div class="col-md-6">
             <label for="first-name" class="form-label">First Name</label>
             <input type="text" class="form-control" id="first-name" formControlName="firstName">

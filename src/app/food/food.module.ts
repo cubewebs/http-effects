@@ -14,6 +14,7 @@ import { OrderListComponent } from './order-list/order-list.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ThankyouComponent } from './thankyou/thankyou.component';
 
+
 @NgModule({
   declarations: [FoodComponent, FoodOrderComponent, OrderListComponent, ThankyouComponent],
   imports: [
@@ -25,5 +26,6 @@ import { ThankyouComponent } from './thankyou/thankyou.component';
     EffectsModule.forFeature([OrderEffects]),
 	ReactiveFormsModule
   ],
+  providers: []
 })
 export class FoodModule {}

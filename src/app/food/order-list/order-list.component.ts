@@ -6,6 +6,8 @@ import { FoodService } from '../service/food.service';
 import { OrderState } from '../store/order.reducer';
 import * as orderSelectors from '../store/order.selectors';
 import * as orderActions from '../store/order.actions';
+import { Router } from '@angular/router';
+import { loadOrder } from '../store/order.actions';
 
 @Component({
   selector: 'app-order-list',
@@ -18,22 +20,28 @@ export class OrderListComponent implements OnInit {
 
 	constructor(
 		private store: Store<OrderState>,
-	) {
+		private route: Router
+	) {}
+
+	ngOnInit(): void {
 		this.loadOrders();
 	}
 
-	ngOnInit(): void {
-		
-	}
-
 	loadOrders() {
+		this.store.dispatch(orderActions.loadOrders());
 		this.orders$ = this.store.select(orderSelectors.selectAllOrders)
 	}
 
+	editOrder(id: number) {
+		this.route.navigate([`/food-order/${id}`])
+	}
+
 	deleteOrder(id: number) {
+
 		if(confirm('Are you sure you want to delete this order?')) {
 			this.store.dispatch(orderActions.deleteOrder({id}))
 			this.loadOrders();
+			this.ngOnInit();
 		} else { return; }
 	}
 

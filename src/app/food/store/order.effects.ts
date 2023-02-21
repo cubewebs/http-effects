@@ -4,6 +4,8 @@ import * as orderActions from '../store/order.actions';
 import { catchError, concatMap, exhaustMap, map, mergeMap } from 'rxjs/operators';
 import { FoodService } from '../service/food.service';
 import { of, tap } from 'rxjs';
+import { updateOrder } from './order.actions';
+import { Router } from '@angular/router';
 
 
 @Injectable()
@@ -57,10 +59,31 @@ export class OrderEffects {
 		)
 	);
 
+	uptedeOrder$ = createEffect(
+		() => this.actions$.pipe(
+			ofType(orderActions.updateOrder),
+			concatMap( action => this.fs.updateOrder(
+				Number(action.update.id),
+				action.update.changes,
+			)),
+			catchError(error => of(orderActions.updateOrderFailure({ error })))
+		),
+		{dispatch: false}
+	);
+
+	// redirectToThankyou$ = createEffect(
+	// 	() => this.actions$.pipe(
+	// 		ofType(orderActions.updateOrder),
+	// 		tap((action) => {
+	// 			this.router.navigate(['/thankyou'])
+	// 		})
+	// 	), { dispatch: false }
+	// )
 
   constructor(
 	private actions$: Actions,
-	private fs: FoodService
+	private fs: FoodService,
+	private router: Router
 	) {}
 
 

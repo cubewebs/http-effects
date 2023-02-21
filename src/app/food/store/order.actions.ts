@@ -47,6 +47,21 @@ export const addOrderFailure = createAction(
   props<{ error: any }>()
 );
 
+export const searchOrders = createAction(
+	'[Order Navbar] Search Orders',
+	props<{ query: string }>()
+);
+
+export const searchOrdersSuccess = createAction(
+	'[Order List] Search Orders Success',
+	props<{ orders: Order[] }>()
+);
+
+export const searchOrdersFailure = createAction(
+	'[Order List] Search Orders Failure',
+	props<{ error: any }>()
+);
+
 export const upsertOrder = createAction(
   '[Order/API] Upsert Order',
   props<{ order: Order }>()
@@ -63,8 +78,13 @@ export const upsertOrders = createAction(
 );
 
 export const updateOrder = createAction(
-  '[Order/API] Update Order',
-  props<{ order: Update<Order> }>()
+  '[Food Order/API] Update Order',
+  props<{ update: Update<Order> }>()
+);
+
+export const updateOrderFailure = createAction(
+  '[Food Order/ Effect] Update Order Failure',
+  props<{ error: any }>()
 );
 
 export const updateOrders = createAction(
