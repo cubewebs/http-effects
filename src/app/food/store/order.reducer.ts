@@ -11,6 +11,8 @@ export interface OrderState extends EntityState<Order> {
   selectedOrderId: number | null,
   allOrdersLoaded: boolean,
   currentOrder: Order | null,
+  orders: Order[],
+  searching: boolean
 }
 
 export const adapter: EntityAdapter<Order> = createEntityAdapter<Order>();
@@ -21,6 +23,8 @@ export const initialState: OrderState = adapter.getInitialState({
   selectedOrderId: null,
   allOrdersLoaded: false,
   currentOrder: null,
+  orders: [],
+  searching: false
 });
 
 export const reducer = createReducer(
@@ -71,7 +75,16 @@ export const reducer = createReducer(
   on(OrderActions.deleteOrders, (state, action) =>
     adapter.removeMany(action.ids, state)
   ),
-  on(OrderActions.clearOrders, (state) => adapter.removeAll(state))
+  on(OrderActions.searchOrders, (state, action) => {
+    return { ...state, searching: action.searching }
+  }),
+  on(OrderActions.searchOrdersSuccess, (state, action) => {
+    return { ...state, orders: action.orders }
+  }),
+  on(OrderActions.searchOrdersFailure, (state, action) =>
+  {return {...state, error: action.error}}
+),
+  on(OrderActions.clearOrders, (state) => adapter.removeAll(state)),
 );
 
 export const getSelectedOrderId = (state: OrderState) => state.selectedOrderId;

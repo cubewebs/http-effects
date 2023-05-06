@@ -49,7 +49,7 @@ export const addOrderFailure = createAction(
 
 export const searchOrders = createAction(
 	'[Order Navbar] Search Orders',
-	props<{ query: string }>()
+	props<{ query: string, searching: boolean }>()
 );
 
 export const searchOrdersSuccess = createAction(

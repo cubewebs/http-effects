@@ -17,6 +17,8 @@ import { loadOrder } from '../store/order.actions';
 export class OrderListComponent implements OnInit {
 
 	orders$?: Observable<Order[]>;
+	ordersFound$?: Observable<Order[]>;
+	searching: boolean = false;
 
 	constructor(
 		private store: Store<OrderState>,
@@ -28,8 +30,18 @@ export class OrderListComponent implements OnInit {
 	}
 
 	loadOrders() {
-		this.store.dispatch(orderActions.loadOrders());
-		this.orders$ = this.store.select(orderSelectors.selectAllOrders)
+
+		this.store.select(orderSelectors.selectSearching).subscribe( searching => {
+			if(searching) {
+				this.searching = searching;
+				this.ordersFound$ = this.store.select(orderSelectors.selectOrdersFound)
+			} else {
+				this.searching = false;
+				this.store.dispatch(orderActions.loadOrders());
+				this.orders$ = this.store.select(orderSelectors.selectAllOrders)
+			}
+		})
+
 	}
 
 	editOrder(id: number) {
@@ -43,6 +55,7 @@ export class OrderListComponent implements OnInit {
 			this.loadOrders();
 			this.ngOnInit();
 		} else { return; }
+
 	}
 
 }

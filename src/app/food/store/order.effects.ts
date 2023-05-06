@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as orderActions from '../store/order.actions';
-import { catchError, concatMap, exhaustMap, map, mergeMap } from 'rxjs/operators';
+import { catchError, concatMap, debounceTime, exhaustMap, map, mergeMap } from 'rxjs/operators';
 import { FoodService } from '../service/food.service';
 import { of, tap } from 'rxjs';
 import { updateOrder } from './order.actions';
@@ -70,6 +70,17 @@ export class OrderEffects {
 		),
 		{dispatch: false}
 	);
+
+	searchOrders$ = createEffect(
+		() => this.actions$.pipe(
+			ofType(orderActions.searchOrders),
+			debounceTime(1000),
+			exhaustMap(({query, searching}) => this.fs.searchOrders(query)),
+			tap(res => console.log('res ->', res)),
+			map((orders) => orderActions.searchOrdersSuccess({ orders })),
+			catchError(error => of(orderActions.searchOrdersFailure({ error })))
+		)
+	)
 
 	// redirectToThankyou$ = createEffect(
 	// 	() => this.actions$.pipe(

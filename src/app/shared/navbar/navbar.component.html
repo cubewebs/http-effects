@@ -10,11 +10,10 @@
 		  <a class="btn btn-outline-primary" routerLink="/food-order" routerLinkActive="active">Order Food</a>
 		</div>
 	  </div>
-	  <div class="d-flex">
-		<form class="d-flex" role="search">
-			<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-			<button class="btn btn-outline-success" type="submit">Search</button>
-		  </form>
+	  <div class="d-flex" style="width: 600px;">
+		<form class="d-flex" role="search" style="width: 600px;">
+			<input #searchInput class="form-control me-2" type="search" (input)="searchQurey(searchInput.value)" placeholder="Search" aria-label="Search">
+		</form>
 	  </div>
 	</div>
   </nav>

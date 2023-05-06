@@ -56,4 +56,5 @@ export class FoodService {
 	const url = `${this.baseUrl}/order/?q=${query}`;
 	return this.http.get<Order[]>(url)
   } 
+  
 }

@@ -52,4 +52,14 @@ export const selectCurrentOrder = createSelector(
 	(orderEntities, orderId) => orderId && orderEntities[orderId]
 );
 
+export const selectOrdersFound = createSelector(
+	selectOrderState,
+	state => state.orders
+);
+
+export const selectSearching = createSelector(
+	selectOrderState,
+	state => state.searching
+);
+
 
